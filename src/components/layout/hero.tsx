@@ -116,7 +116,7 @@ export function Hero() {
       className="relative w-full h-[500px] sm:h-screen min-h-[500px] max-h-[800px] overflow-hidden bg-gradient-to-br from-slate-50 to-emerald-50 px-4 sm:px-6 lg:px-12 pb-4 sm:pb-8"
     >
       {/* Background Image Container */}
-      <div className="absolute inset-0 mx-4 sm:mx-6 lg:mx-12 mb-2 sm:mb-4 rounded-xl shadow-lg overflow-hidden">
+      <div className="absolute inset-0 mx-0 sm:mx-0 lg:mx-0 mb-2 sm:mb-4 rounded-sm shadow-lg overflow-hidden">
         {/* Skeleton loader otimizado */}
         {!imageLoaded && !imageError && (
           <div className="absolute inset-0 bg-gradient-to-br from-slate-200 via-emerald-100 to-emerald-200">
@@ -160,9 +160,24 @@ export function Hero() {
           }}
         />
         
-        {/* Gradient overlay with parallax */}
+        {/* Animated gradient overlay - Mind & Wholeness breathing effect */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" />
         <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-black/50 via-black/20 to-transparent" 
+          className="absolute inset-0 opacity-20"
+          animate={{
+            background: [
+              'radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(251, 191, 36, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 50% 20%, rgba(251, 191, 36, 0.4) 0%, transparent 50%), radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 80% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%), radial-gradient(circle at 20% 50%, rgba(251, 191, 36, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 50% 80%, rgba(251, 191, 36, 0.4) 0%, transparent 50%), radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.4) 0%, transparent 50%)',
+              'radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(251, 191, 36, 0.4) 0%, transparent 50%)'
+            ]
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: 'easeInOut'
+          }}
           style={{ opacity }}
         />
       </div>
