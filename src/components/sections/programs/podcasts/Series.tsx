@@ -51,11 +51,11 @@ const PodcastSeries = () => {
       <h3 className="text-2xl font-light text-gray-900 mb-4">
         {serie.title}
       </h3>
-      
+
       <p className="text-gray-600 text-sm leading-relaxed mb-6">
         {serie.description}
       </p>
-      
+
       <button className={`bg-${serie.color}-600 hover:bg-${serie.color}-700 text-white text-sm font-medium px-6 py-2 rounded transition-colors`}>
         LEARN MORE
       </button>
@@ -81,6 +81,22 @@ const PodcastSeries = () => {
           <h1 className="text-3xl sm:text-4xl font-serif text-gray-900 mb-8">
             Podcast Series
           </h1>
+
+          {/* Spotify Podcast Embed */}
+          <div className="mb-8">
+            <iframe
+              data-testid="embed-iframe"
+              style={{ borderRadius: '12px' }}
+              src="https://open.spotify.com/embed/show/3TkbNSyg8feDQhJyc13oPr?utm_source=generator&t=0"
+              width="100%"
+              height="152"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="Mind and Wholeness Podcast on Spotify"
+            />
+          </div>
         </div>
         <div className="max-w-7xl mx-auto px-6 pb-16">
           {podcastSeries.length > 0 ? (
@@ -93,11 +109,11 @@ const PodcastSeries = () => {
                 <div className="bg-white rounded-full w-24 h-24 flex items-center justify-center mx-auto mb-6 shadow-lg">
                   <Podcast className="w-12 h-12 text-emerald-600" />
                 </div>
-                
+
                 <h3 className="text-2xl font-light text-gray-900 mb-4">
                   No Podcast Series Available
                 </h3>
-                
+
                 <p className="text-gray-600 text-sm leading-relaxed mb-8">
                   We're working on bringing you amazing podcast series.
                 </p>

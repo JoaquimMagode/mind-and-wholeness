@@ -67,7 +67,7 @@ const AudioPlayer = ({ podcast }: { podcast: Podcast }) => {
   };
 
 
-    const handleSeek = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleSeek = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
     const pos = (e.clientX - rect.left) / rect.width;
     const newTime = pos * duration;
@@ -86,7 +86,7 @@ const AudioPlayer = ({ podcast }: { podcast: Podcast }) => {
   return (
     <div className="flex-1 p-3 md:p-4">
       <div className={`bg-gradient-to-br ${podcast.bgGradient} border border-white/40 p-3 md:p-4 h-full flex flex-col justify-between backdrop-blur-sm`}>
-        
+
         {/* Header compacto */}
         <div className="mb-3">
           <div className="text-xs text-gray-600 mb-1 font-medium opacity-80">
@@ -96,23 +96,22 @@ const AudioPlayer = ({ podcast }: { podcast: Podcast }) => {
             {podcast.episode}
           </div>
         </div>
-        
+
         {/* Player principal - mais compacto */}
         <div className="mb-3">
           {/* Waveform simplificado e menor */}
           <div className="mb-3 relative">
             <div className="h-8 md:h-10 bg-white/50 flex items-center justify-center overflow-hidden relative cursor-pointer" onClick={handleSeek}>
               <div className="flex items-end gap-px h-full px-2 absolute inset-0">
-                {Array.from({length: 40}).map((_, i) => {
+                {Array.from({ length: 40 }).map((_, i) => {
                   const height = Math.sin(i * 0.2) * 15 + Math.random() * 20 + 10;
                   const isActive = progress > (i / 40) * 100;
                   return (
-                    <div 
-                      key={i} 
-                      className={`w-0.5 md:w-1 rounded-full transition-colors duration-200 ${
-                        isActive ? 'bg-blue-500' : 'bg-gray-300'
-                      }`} 
-                      style={{height: `${height}%`}}
+                    <div
+                      key={i}
+                      className={`w-0.5 md:w-1 rounded-full transition-colors duration-200 ${isActive ? 'bg-blue-500' : 'bg-gray-300'
+                        }`}
+                      style={{ height: `${height}%` }}
                     ></div>
                   );
                 })}
@@ -123,12 +122,12 @@ const AudioPlayer = ({ podcast }: { podcast: Podcast }) => {
                 </div>
               )}
             </div>
-            
+
             {/* Barra de progresso mais fina */}
             <div className="mt-2 h-1 bg-gray-200 overflow-hidden cursor-pointer" onClick={handleSeek}>
-              <div 
+              <div
                 className="h-full bg-gradient-to-r from-blue-500 to-blue-600 transition-all duration-300 ease-out rounded-full"
-                style={{width: `${progress}%`}}
+                style={{ width: `${progress}%` }}
               ></div>
             </div>
           </div>
@@ -139,29 +138,29 @@ const AudioPlayer = ({ podcast }: { podcast: Podcast }) => {
               <button className="p-1 hover:bg-white/30 rounded-full transition-colors">
                 <SkipBack className="w-4 h-4 text-gray-600" />
               </button>
-              
-              <button 
+
+              <button
                 onClick={handlePlayPause}
                 className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 rounded-full flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 focus:outline-none"
               >
-                {isPlaying ? 
+                {isPlaying ?
                   <Pause className="w-3 h-3 md:w-4 md:h-4 text-white" fill="white" /> :
                   <Play className="w-3 h-3 md:w-4 md:h-4 text-white ml-0.5" fill="white" />
                 }
               </button>
-              
+
               <button className="p-1 hover:bg-white/30 rounded-full transition-colors">
                 <SkipForward className="w-4 h-4 text-gray-600" />
               </button>
             </div>
-            
+
             {/* Tempo */}
             <div className="text-xs text-gray-600 font-mono">
               {formatTime(currentTime)} / {formatTime(duration)}
             </div>
           </div>
         </div>
-        
+
         {/* Controles secundários - mais compactos */}
         <div className="flex items-center justify-between pt-2 border-t border-white/20">
           <div className="flex items-center gap-2 md:gap-3">
@@ -216,7 +215,7 @@ const PodcastItem = ({ podcast, index }: { podcast: Podcast; index: number }) =>
       </div>
       <p className="text-gray-600 text-sm md:text-base leading-relaxed">{podcast.description}</p>
     </div>
-    
+
     {/* Player e Cover - layout melhorado */}
     <div className="bg-white shadow-md md:shadow-lg overflow-hidden border border-gray-100">
       <div className="flex flex-col md:flex-row">
@@ -275,10 +274,26 @@ const StartSection = () => {
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-serif text-gray-900 mb-3 md:mb-4 bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
           Where to Start?
         </h1>
-        <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-7xl mx-auto">
-          Sometimes it can be hard to know where to jump in – especially if you are new to our podcast network. 
+        <p className="text-sm md:text-base text-gray-600 leading-relaxed max-w-7xl mx-auto mb-6">
+          Sometimes it can be hard to know where to jump in – especially if you are new to our podcast network.
           We've curated the perfect entry points for each series.
         </p>
+
+        {/* Spotify Podcast Embed */}
+        <div className="mt-6">
+          <iframe
+            data-testid="embed-iframe"
+            style={{ borderRadius: '12px' }}
+            src="https://open.spotify.com/embed/show/3TkbNSyg8feDQhJyc13oPr?utm_source=generator&t=0"
+            width="100%"
+            height="152"
+            frameBorder="0"
+            allowFullScreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+            title="Mind and Wholeness Podcast on Spotify"
+          />
+        </div>
       </div>
 
       {/* Lista de Podcasts */}
